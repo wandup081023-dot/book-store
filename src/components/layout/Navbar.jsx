@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Search, Heart, ShoppingCart, Menu, X, ChevronDown } from 'lucide-react';
 import { CartContext } from '../../context/CartContext';
 
@@ -91,6 +91,7 @@ function MobileDrawer({ open, onClose, cartCount }) {
 }
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const { cartCount } = useContext(CartContext);
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -156,7 +157,18 @@ export default function Navbar() {
                   <button className="flex-shrink-0 w-9 h-9 flex items-center justify-center text-brand-muted hover:text-brand-red transition-colors" onClick={() => setSearchOpen(!searchOpen)}>
                     <Search size={18} />
                   </button>
-                  <input ref={searchRef} type="search" placeholder="Search books…" className={`flex-1 bg-transparent font-inter text-sm text-brand-text placeholder-brand-muted outline-none pr-3 transition-all ${searchOpen ? "w-full opacity-100" : "w-0 opacity-0"}`} onKeyDown={(e) => e.key === "Escape" && setSearchOpen(false)} />
+                  <input ref={searchRef} type="search" placeholder="Search books…" className={`flex-1 bg-transparent font-inter text-sm text-brand-text placeholder-brand-muted outline-none pr-3 transition-all ${searchOpen ? "w-full opacity-100" : "w-0 opacity-0"}`} 
+                    onKeyDown={(e) => {
+                      if (e.key === "Escape") setSearchOpen(false);
+                      if (e.key === "Enter") {
+                        if (e.target.value.trim()) {
+                          navigate(`/books?search=${encodeURIComponent(e.target.value.trim())}`);
+                          setSearchOpen(false);
+                          e.target.value = '';
+                        }
+                      }
+                    }} 
+                  />
                 </div>
               </div>
 

@@ -16,6 +16,7 @@ import ProductPage from './pages/ProductPage';
 import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import NotFound from './components/ui/NotFound';
+import ScrollToTop from './components/layout/ScrollToTop';
 
 // Admin Pages
 import AdminLogin from './pages/admin/AdminLogin';
@@ -42,6 +43,7 @@ export default function App() {
       <AdminProvider>
         <CartProvider>
           <div className="min-h-screen flex flex-col font-inter bg-[#FAFAF7] text-[#1A1A1A]">
+            <ScrollToTop />
             <Routes>
               {/* Storefront Routes */}
               <Route path="/" element={<HomePage />} />

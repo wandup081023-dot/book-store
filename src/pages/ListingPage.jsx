@@ -38,12 +38,23 @@ export default function ListingPage() {
     }
   }, [searchParams]);
 
+  const searchQuery = searchParams.get('search') || "";
+
   const filteredBooks = useMemo(() => {
     if (!BOOKS || !Array.isArray(BOOKS)) return [];
     let result = [...BOOKS];
     if (activeGenre !== "All Books") {
       result = result.filter(b => b.genre === activeGenre);
     }
+    
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      result = result.filter(b => 
+        (b.title && b.title.toLowerCase().includes(q)) || 
+        (b.author && b.author.toLowerCase().includes(q))
+      );
+    }
+
     result = result.filter(b => b?.price <= priceRange);
     if (format !== "All") {
       result = result.filter(b => Array.isArray(b?.format) ? b.format.includes(format) : b?.format === format);
@@ -57,7 +68,7 @@ export default function ListingPage() {
     if (sortOption === "Newest") result.sort((a, b) => (b.id || 0) - (a.id || 0)); // Mock logic
     
     return result;
-  }, [activeGenre, priceRange, format, rating, sortOption]);
+  }, [activeGenre, priceRange, format, rating, sortOption, searchQuery]);
 
   const handleAddToCart = (book) => {
     addToCart(book);
@@ -150,7 +161,9 @@ export default function ListingPage() {
 
           <div className="flex items-end justify-between border-b border-gray-200 pb-6 mb-8">
             <div>
-              <h1 className="font-playfair text-4xl md:text-5xl font-bold text-brand-navy mb-2">{activeGenre}</h1>
+              <h1 className="font-playfair text-4xl md:text-5xl font-bold text-brand-navy mb-2">
+                {searchQuery ? `Search Results for "${searchQuery}"` : activeGenre}
+              </h1>
               <p className="font-inter text-sm text-brand-muted">{filteredBooks.length} results</p>
             </div>
             
