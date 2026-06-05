@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FAFAF7;
+    color: #1A1A1A;
+  }
+  h1, h2, h3 { font-family: 'Playfair Display', serif; }
+}
+
+@keyframes slideInFromRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0%);  opacity: 1; }
+}
+@keyframes slideOutToLeft {
+  from { transform: translateX(0%);   opacity: 1; }
+  to   { transform: translateX(-100%); opacity: 0; }
+}
+.book-slide-in  { animation: slideInFromRight 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+.book-slide-out { animation: slideOutToLeft  0.4s cubic-bezier(0.55, 0, 1, 0.45) forwards; }
+
+@keyframes navSlide { 
+  from { transform: translateY(-100%); opacity:0; } 
+  to { transform: translateY(0); opacity:1; } 
+}
+.nav-slide {
+  animation: navSlide 0.5s ease forwards;
+}
+
+@keyframes iconBounce { 
+  0%,100% { transform:translateY(0); } 
+  50% { transform:translateY(-4px); } 
+}
+.icon-bounce {
+  animation: iconBounce 0.4s ease forwards;
+}
+
+@keyframes logoPulse {
+  0% { text-shadow: 0 0 0px rgba(192,57,43,0); }
+  50% { text-shadow: 0 0 15px rgba(192,57,43,0.5); }
+  100% { text-shadow: 0 0 0px rgba(192,57,43,0); }
+}
+.logo-pulse {
+  animation: logoPulse 0.8s ease forwards;
+}
+
+.nav-link-hover {
+  position: relative;
+}
+.nav-link-hover::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #C0392B;
+  transition: width 0.3s ease;
+}
+.nav-link-hover:hover::after {
+  width: 100%;
+}
