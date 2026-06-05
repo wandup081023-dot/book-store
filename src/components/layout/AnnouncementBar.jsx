@@ -13,7 +13,9 @@ export default function AnnouncementBar() {
       <div className="absolute left-0 top-0 h-full w-16 z-10 pointer-events-none bg-gradient-to-r from-[#C0392B] to-transparent" />
       <div className="absolute right-0 top-0 h-full w-16 z-10 pointer-events-none bg-gradient-to-l from-[#C0392B] to-transparent" />
       
-      <div className="whitespace-nowrap animate-marquee flex items-center font-inter text-xs font-semibold uppercase tracking-widest">
+      <div className="whitespace-nowrap animate-marquee flex items-center font-inter text-xs font-semibold uppercase tracking-widest w-max">
+        <span>📦 Free shipping above ₹499&emsp;·&emsp;🔥 50% Off Sale is LIVE&emsp;·&emsp;⚡ Extra 10% Off above ₹1499&emsp;·&emsp;</span>
+        <span>📦 Free shipping above ₹499&emsp;·&emsp;🔥 50% Off Sale is LIVE&emsp;·&emsp;⚡ Extra 10% Off above ₹1499&emsp;·&emsp;</span>
         <span>📦 Free shipping above ₹499&emsp;·&emsp;🔥 50% Off Sale is LIVE&emsp;·&emsp;⚡ Extra 10% Off above ₹1499&emsp;·&emsp;</span>
         <span>📦 Free shipping above ₹499&emsp;·&emsp;🔥 50% Off Sale is LIVE&emsp;·&emsp;⚡ Extra 10% Off above ₹1499&emsp;·&emsp;</span>
       </div>
